@@ -18,11 +18,11 @@
     </div>
     <div class="container row">
       <div id="sec-search" class="bg-secondary col-3">
-        <div id="search-bar">
+        <form id="search-form">
           <h2>Search City</h2>
-          <input type="text" />
-          <button>Search</button>
-        </div>
+          <input id="search-bar" type="text" />
+          <input id="submit-btn" type="submit" />
+        </form>
         <hr />
         <div id="search-results">
           <p>Where search results go</p>
@@ -30,7 +30,7 @@
       </div>
       <div id="sec-weather" class="bg-warning col-9">
         <div id="forecast-today">
-          <h2>Atlanta (June 29th, 2022)</h2>
+          <h2 id="title">Enter a City Name</h2>
           <div id="temp">74.01</div>
           <div id="wind">6.67 MPH</div>
           <div id="humidity">46 %</div>
@@ -55,11 +55,7 @@
         </div>
       </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./Assets/Js/script.js"></script>
   </body>
 </html>
