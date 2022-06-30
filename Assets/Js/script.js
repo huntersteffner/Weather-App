@@ -16,11 +16,38 @@ $('#submit-btn').on('click', function(e) {
     $('#search-results').append(city)
     $('#title').text(searchedCity)
 
-    const cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&appid=4e98480a953b623b3e964585552f2e66`
+    const cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
     console.log(cityApi)
+    
 
-    const fetchedObject = fetch(cityApi).then(res => res.json()).then(data => console.log(data))
+    let fetchedObject
 
+    fetch(cityApi).then(function(res) {
+        return res.json()
+    }).then(function(data) {
+        fetchedObject = data
+        console.log(fetchedObject)
+        // $('#temp').text(fetchedObject.main.temp + '℉')
+        // $('#wind').text(fetchedObject.wind.speed + 'MPH')
+        // $('#humidity').text(fetchedObject.main.humidity)
+        const cityApi2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${fetchedObject.coord.lat}&lon=${fetchedObject.coord.lon}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+        fetch(cityApi2).then(function(res) {
+            return res.json().then(function(data) {
+                console.log(data)
+                $('#temp').text(data.current.temp + '℉')
+                $('#wind').text(data.current.wind_speed + 'MPH')
+                $('#humidity').text(data.current.humidity)
+                $('#uv').text(data.current.uvi)
+            })
+        })
+        console.log(cityApi2)
+    })
+
+  
+    
+    
+    
+    
     e.preventDefault()
 })
 
