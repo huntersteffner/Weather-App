@@ -61,6 +61,10 @@ $('#submit-btn').on('click', function(e) {
                     console.log('Medium')
                     $('#uv').attr('class', 'uvMedium')
                 }
+                const iconToday = data.current.weather[0].icon 
+                const iconTodayUrl = `http://openweathermap.org/img/wn/${iconToday}@2x.png`
+                console.log(iconTodayUrl)
+                $('#icon').html(`<img src="${iconTodayUrl}" />`)
 
                 for(let i = 1; i < 6; i++) {
                     const curId = `#day${i}`
