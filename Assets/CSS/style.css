@@ -1,0 +1,25 @@
+.uvSafe {
+    background-color: green;
+    display: inline;
+
+    flex-direction: column;
+    padding: .2rem;
+    border-radius: 10px;
+    
+}
+.uvMedium {
+    background-color: yellow;
+    display: inline;
+
+    flex-direction: column;
+    padding: .2rem;
+    border-radius: 10px;
+}
+.uvDangerous {
+    background-color: red;
+    display: inline;
+
+    flex-direction: column;
+    padding: .2rem;
+    border-radius: 10px;
+}
