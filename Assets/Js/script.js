@@ -10,11 +10,27 @@ fetch('https://api.openweathermap.org/data/2.5/weather?q=Atlanta&appid=4e98480a9
 
 // let city = <div id="Atlanta" class="city">Atlanta</div>
 
+const dateToday = moment().format(': MMMM Do, YYYY')
+const datePlus1 = moment().add(1, 'days').format('MMMM Do YYYY')
+const datePlus2 = moment().add(2, 'days').format('MMMM Do YYYY')
+const datePlus3 = moment().add(3, 'days').format('MMMM Do YYYY')
+const datePlus4 = moment().add(4, 'days').format('MMMM Do YYYY')
+const datePlus5 = moment().add(5, 'days').format('MMMM Do YYYY')
+
+$('#date1').text(datePlus1)
+$('#date2').text(datePlus2)
+$('#date3').text(datePlus3)
+$('#date4').text(datePlus4)
+$('#date5').text(datePlus5)
+
+
+
+
 $('#submit-btn').on('click', function(e) {
     let searchedCity = $('#search-bar').val()
     const city = `<div id="${searchedCity}" class="city">${searchedCity}</div>`
     $('#search-results').append(city)
-    $('#title').text(searchedCity)
+    $('#title').text(searchedCity + dateToday)
 
     const cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
     console.log(cityApi)
@@ -38,6 +54,18 @@ $('#submit-btn').on('click', function(e) {
                 $('#wind').text(data.current.wind_speed + 'MPH')
                 $('#humidity').text(data.current.humidity)
                 $('#uv').text(data.current.uvi)
+
+                for(let i = 1; i < 6; i++) {
+                    const curId = `#day${i}`
+                    const curTemp = `#temp${i}`
+                    const curWind = `#wind${i}`
+                    const curHumidity = `#humidity${i}`
+                    console.log(data.daily[i].temp.day)
+                    console.log(curId, curTemp)
+                    $(curId).children(curTemp).text(`Temp: ${data.daily[i].temp.day} ℉`)
+                    $(curId).children(curWind).text(`Wind: ${data.daily[i].wind_speed} MPH`)
+                    $(curId).children(curHumidity).text(`Temp: ${data.daily[i].humidity}%`)
+                }
             })
         })
         console.log(cityApi2)
