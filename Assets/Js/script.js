@@ -20,22 +20,20 @@ $('#date3').text(datePlus3)
 $('#date4').text(datePlus4)
 $('#date5').text(datePlus5)
 
+
 $('#title').text(`Enter a City Name - ${dateToday}`)
 
+// const updateTitle = function(e) {
+//     let searchedCity = $('#search-bar').val()
+//     const city = `<div id="${searchedCity}" class="city">${searchedCity}</div>`
+//     $('#search-results').append(city)
+//     $('#title').text(`${searchedCity} - ${dateToday}`)
+//     e.preventDefault()
+// }
 
+const getWeather = function (cityApi, fetchedObject) {
 
-
-$('#submit-btn').on('click', function(e) {
-    let searchedCity = $('#search-bar').val()
-    const city = `<div id="${searchedCity}" class="city">${searchedCity}</div>`
-    $('#search-results').append(city)
-    $('#title').text(`${searchedCity} - ${dateToday}`)
-
-    const cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
-    console.log(cityApi)
     
-
-    let fetchedObject
 
     fetch(cityApi).then(function(res) {
         return res.json()
@@ -46,10 +44,10 @@ $('#submit-btn').on('click', function(e) {
         fetch(cityApi2).then(function(res) {
             return res.json().then(function(data) {
                 console.log(data)
-                $('#temp').text(data.current.temp + '℉')
-                $('#wind').text(data.current.wind_speed + 'MPH')
-                $('#humidity').text(data.current.humidity)
-                $('#uv').text(data.current.uvi)
+                $('#temp').text(`Temp: ${data.current.temp} ℉`)
+                $('#wind').text(`Wind Speed: ${data.current.wind_speed} MPH`)
+                $('#humidity').text(`Humidity: ${data.current.humidity}%`)
+                $('#uv').text(`UV: ${data.current.uvi}`)
                 console.log(data.current.uvi)
                 if(data.current.uvi < 4) {
                     console.log('Safe')
@@ -65,33 +63,115 @@ $('#submit-btn').on('click', function(e) {
                 const iconTodayUrl = `http://openweathermap.org/img/wn/${iconToday}@2x.png`
                 console.log(iconTodayUrl)
                 $('#icon').html(`<img src="${iconTodayUrl}" />`)
-
+    
                 for(let i = 1; i < 6; i++) {
                     const curId = `#day${i}`
                     const curTemp = `#temp${i}`
                     const curWind = `#wind${i}`
                     const curHumidity = `#humidity${i}`
+                    const curIcon = `#icon${i}`
+                    const curIconObj = data.daily[i].weather[0].icon
+                    const curIconUrl = `http://openweathermap.org/img/wn/${curIconObj}@2x.png`
                     console.log(data.daily[i].temp.day)
                     console.log(curId, curTemp)
+                    $(curId).children(curIcon).html(`<img src="${curIconUrl}" />`)
                     $(curId).children(curTemp).text(`Temp: ${data.daily[i].temp.day} ℉`)
                     $(curId).children(curWind).text(`Wind: ${data.daily[i].wind_speed} MPH`)
-                    $(curId).children(curHumidity).text(`Temp: ${data.daily[i].humidity}%`)
+                    $(curId).children(curHumidity).text(`Humidity: ${data.daily[i].humidity}%`)
                 }
             })
         })
         console.log(cityApi2)
     })
+} 
 
-  
+
+
+
+
+$('#submit-btn').on('click', function(e) {
+    let searchedCity = $('#search-bar').val()
+    const city = `<div id="${searchedCity}" class="city">${searchedCity}</div>`
+    $('#search-results').append(city)
+    $('#title').text(`${searchedCity} - ${dateToday}`)
+
+    // updateTitle(e)
+
+    let fetchedObject
     
     
+    let cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+
+
+    $('.city').on('click', function() {
+        const cityCard = $(this).text()
+        console.log(cityCard)
+        searchedCity = cityCard
+        cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+        
+        $('#title').text(`${searchedCity} - ${dateToday}`)
+
+
+        // updateTitle(e)
+        getWeather(cityApi, fetchedObject)
+    })
     
+    console.log(cityApi)
     
+
+    
+
+    getWeather(cityApi, fetchedObject)
+
+    // fetch(cityApi).then(function(res) {
+    //     return res.json()
+    // }).then(function(data) {
+    //     fetchedObject = data
+    //     console.log(fetchedObject)
+    //     const cityApi2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${fetchedObject.coord.lat}&lon=${fetchedObject.coord.lon}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+    //     fetch(cityApi2).then(function(res) {
+    //         return res.json().then(function(data) {
+    //             console.log(data)
+    //             $('#temp').text(`Temp: ${data.current.temp} ℉`)
+    //             $('#wind').text(`Wind Speed: ${data.current.wind_speed} MPH`)
+    //             $('#humidity').text(`Humidity: ${data.current.humidity}%`)
+    //             $('#uv').text(`UV: ${data.current.uvi}`)
+    //             console.log(data.current.uvi)
+    //             if(data.current.uvi < 4) {
+    //                 console.log('Safe')
+    //                 $('#uv').attr('class', 'uvSafe')
+    //             } else if (data.current.uvi > 6) {
+    //                 console.log('Dangerous')
+    //                 $('#uv').attr('class', 'uvDangerous')
+    //             } else {
+    //                 console.log('Medium')
+    //                 $('#uv').attr('class', 'uvMedium')
+    //             }
+    //             const iconToday = data.current.weather[0].icon 
+    //             const iconTodayUrl = `http://openweathermap.org/img/wn/${iconToday}@2x.png`
+    //             console.log(iconTodayUrl)
+    //             $('#icon').html(`<img src="${iconTodayUrl}" />`)
+
+    //             for(let i = 1; i < 6; i++) {
+    //                 const curId = `#day${i}`
+    //                 const curTemp = `#temp${i}`
+    //                 const curWind = `#wind${i}`
+    //                 const curHumidity = `#humidity${i}`
+    //                 const curIcon = `#icon${i}`
+    //                 const curIconObj = data.daily[i].weather[0].icon
+    //                 const curIconUrl = `http://openweathermap.org/img/wn/${curIconObj}@2x.png`
+    //                 console.log(data.daily[i].temp.day)
+    //                 console.log(curId, curTemp)
+    //                 $(curId).children(curIcon).html(`<img src="${curIconUrl}" />`)
+    //                 $(curId).children(curTemp).text(`Temp: ${data.daily[i].temp.day} ℉`)
+    //                 $(curId).children(curWind).text(`Wind: ${data.daily[i].wind_speed} MPH`)
+    //                 $(curId).children(curHumidity).text(`Humidity: ${data.daily[i].humidity}%`)
+    //             }
+    //         })
+    //     })
+    //     console.log(cityApi2)
+    // })
+
     e.preventDefault()
 })
 
-
-fetch('https://api.openweathermap.org/data/2.5/weather?q=miami&appid=4e98480a953b623b3e964585552f2e66').then(res => res.json()).then(data => console.log(data))
-fetch('https://api.openweathermap.org/data/2.5/weather?q=Miami&appid=4e98480a953b623b3e964585552f2e66').then(res => res.json()).then(data => console.log(data))
-fetch('https://api.openweathermap.org/data/2.5/weather?q=MIAmi&appid=4e98480a953b623b3e964585552f2e66').then(res => res.json()).then(data => console.log(data))
-fetch('https://api.openweathermap.org/data/2.5/weather?q=mIAMI&appid=4e98480a953b623b3e964585552f2e66').then(res => res.json()).then(data => console.log(data))

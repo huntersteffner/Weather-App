@@ -23,3 +23,12 @@
     padding: .2rem;
     border-radius: 10px;
 }
+
+img {
+    width: 2.5rem;
+}
+
+.city {
+    background-color: #999;
+    cursor: pointer;
+}
