@@ -15,23 +15,23 @@
     <title>Weather App</title>
   </head>
   <body>
-    <div class="jumbotron bg-light">
+    <header class="jumbotron banner">
       <h1>The Wonderful Weather App</h1>
-    </div>
-    <div class="container row">
-      <div id="sec-search" class="bg-secondary col-3">
+    </header>
+    <main class="container-fluid row">
+      <section id="sec-search" class="bg-secondary col-12 col-md-4">
         <form id="search-form">
           <h2>Search City</h2>
           <input id="search-bar" type="text" />
-          <input id="submit-btn" type="submit" />
+          <input id="submit-btn" class="btn-primary rounded" type="submit" />
         </form>
         <hr />
         <div id="search-results">
-          <p>Where search results go</p>
+          <h3>Recent Searches</h3>
         </div>
-      </div>
-      <div id="sec-weather" class="bg-warning col-9">
-        <div id="forecast-today">
+      </section>
+      <section id="sec-weather" class="col-12 col-md-8 border">
+        <section id="forecast-today">
           <h2 id="title">Enter a City Name</h2>
           <div id="icon">
             <img src="http://openweathermap.org/img/wn/10d@2x.png" />
@@ -40,46 +40,46 @@
           <div id="wind">Wind Speed:</div>
           <div id="humidity">Humidity:</div>
           <div id="uv">UV:</div>
-        </div>
-        <div id="forecast-5day" class="row">
-          <div id="day1" class="card col-2 bg-primary">
+        </section>
+        <section id="forecast-5day" class="row">
+          <div id="day1" class="card col-9 col-md-10 col-lg-2 m-1">
             <div id="date1"></div>
             <div id="icon1"></div>
             <div id="temp1">Temp:</div>
             <div id="wind1">Wind:</div>
             <div id="humidity1">Humidity:</div>
           </div>
-          <div id="day2" class="card col-2 bg-primary">
+          <div id="day2" class="card col-9 col-md-5 col-lg-2 m-1">
             <div id="date2"></div>
             <div id="icon2"></div>
             <div id="temp2">Temp:</div>
             <div id="wind2">Wind:</div>
             <div id="humidity2">Humidity:</div>
           </div>
-          <div id="day3" class="card col-2 bg-primary">
+          <div id="day3" class="card col-9 col-md-5 col-lg-2 m-1">
             <div id="date3"></div>
             <div id="icon3"></div>
             <div id="temp3">Temp:</div>
             <div id="wind3">Wind:</div>
             <div id="humidity3">Humidity:</div>
           </div>
-          <div id="day4" class="card col-2 bg-primary">
+          <div id="day4" class="card col-9 col-md-5 col-lg-2 m-1">
             <div id="date4"></div>
             <div id="icon4"></div>
             <div id="temp4">Temp:</div>
             <div id="wind4">Wind:</div>
             <div id="humidity4">Humidity:</div>
           </div>
-          <div id="day5" class="card col-2 bg-primary">
+          <div id="day5" class="card col-9 col-md-5 col-lg-2 m-1">
             <div id="date5"></div>
             <div id="icon5"></div>
             <div id="temp5">Temp:</div>
             <div id="wind5">Wind:</div>
             <div id="humidity5">Humidity:</div>
           </div>
-        </div>
-      </div>
-    </div>
+        </section>
+      </section>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./Assets/Js/script.js"></script>
   </body>

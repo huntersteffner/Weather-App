@@ -1,3 +1,19 @@
+:root {
+    --main-color: #75b4e3;
+    --secondary-color: #31255a;
+}
+body {
+    background-color: var(--main-color);
+}
+
+.banner {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+#search-form {
+    
+}
+
 .uvSafe {
     background-color: green;
     display: inline;
@@ -23,12 +39,38 @@
     padding: .2rem;
     border-radius: 10px;
 }
-
+#forecast-5day {
+    display: flex;
+    justify-content: center;
+}
 img {
     width: 2.5rem;
 }
 
 .city {
-    background-color: #999;
+    background-color: var(--secondary-color);
+    color: #fff;
+    font-size: 1.4rem;
+    margin: .4rem;
     cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.card div {
+    border: none;
+}
+
+#sec-weather {
+    font-size: 1.2rem;
+    color: black;
+}
+
+.card {
+    background-color: var(--secondary-color);
+    color: #fff;
+    font-size: 1rem;
+}
+#title {
+    font-size: 2rem;
 }

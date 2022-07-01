@@ -95,7 +95,6 @@ $('#submit-btn').on('click', function(e) {
     $('#search-results').append(city)
     $('#title').text(`${searchedCity} - ${dateToday}`)
 
-    // updateTitle(e)
 
     let fetchedObject
     
@@ -112,7 +111,6 @@ $('#submit-btn').on('click', function(e) {
         $('#title').text(`${searchedCity} - ${dateToday}`)
 
 
-        // updateTitle(e)
         getWeather(cityApi, fetchedObject)
     })
     
