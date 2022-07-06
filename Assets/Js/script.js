@@ -1,5 +1,4 @@
 'use strict'
-
 // Mutable Variables
 let searchedCity
 let cityApi
@@ -21,8 +20,6 @@ console.log(localStorageArray)
             const city =`<div id="${localStorageArray[i]}" class="city">${localStorageArray[i]}</div>`
             $('#search-results').append(city)
         }
-
-    
 }
 // Using Moment.js this provides the date variables for today's date and the five day forcast
 const dateToday = moment().format('MMMM Do, YYYY')

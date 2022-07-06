@@ -10,9 +10,6 @@ body {
     background-color: var(--secondary-color);
     color: #fff;
 }
-#search-form {
-    
-}
 
 .uvSafe {
     background-color: green;
