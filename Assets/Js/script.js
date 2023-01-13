@@ -4,6 +4,7 @@ let searchedCity
 let cityApi
 let fetchedObject
 let localStorageArray = []
+const apiKey = process.env.WEATHER_API_KEY
 
 // Initial Local Storage pulls
 let storedSearches = JSON.parse(localStorage.getItem('recentSearches'))
@@ -41,7 +42,7 @@ const recentSearchClick = function() {
     $('.city').on('click', function() {
         const cityCard = $(this).text()
         searchedCity = cityCard
-        cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+        cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=${apiKey}`
         
         $('#title').text(`${searchedCity} - ${dateToday}`)
         getWeather(cityApi, fetchedObject)
@@ -55,7 +56,7 @@ const getWeather = function (cityApi, fetchedObject) {
     }).then(function(data) {
         fetchedObject = data
         // Due to the limitations in the api url that searches by cities, I pull the longitude and latitude coordinates from the api for the city and then make a second API call, because the call by latitude and longitude has more information than searching by the city
-        const cityApi2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${fetchedObject.coord.lat}&lon=${fetchedObject.coord.lon}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+        const cityApi2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${fetchedObject.coord.lat}&lon=${fetchedObject.coord.lon}&units=imperial&appid=${apiKey}`
         fetch(cityApi2).then(function(res) {
             return res.json().then(function(data) {
                 // Pull data for today's forecast
@@ -104,12 +105,12 @@ $('#submit-btn').on('click', function(e) {
     localStorageArray.push(searchedCity)
     localStorage.setItem('recentSearches', JSON.stringify(localStorageArray))
     // Set which city the API will search for
-    let cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+    let cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=${apiKey}`
     // What happens when you click on a recent searched item
     $('.city').on('click', function() {
         const cityCard = $(this).text()
         searchedCity = cityCard
-        cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=4e98480a953b623b3e964585552f2e66`
+        cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=imperial&appid=${apiKey}`
         
         $('#title').text(`${searchedCity} - ${dateToday}`)
         getWeather(cityApi, fetchedObject)
